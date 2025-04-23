@@ -1,0 +1,1986 @@
+20250423 15:25:04 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 15:25:04 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 15:25:05 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x1458e5ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x1458ebd30>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x1458e2f70>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x1458e5040>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': None, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x14588daf0>
+             │    └ <httpcore.SyncBackend object at 0x1459198e0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x145d6a1c0>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x145d0fe40>
+    └ <contextlib._GeneratorContextManager object at 0x145d6b250>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x13e1494c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+               └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x13e149550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x13e1495e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x13e149670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x13e137e50>
+               └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x1458e5ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x145d6a340>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x145d0fd60>
+    └ <contextlib._GeneratorContextManager object at 0x145d67af0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x127bedfd0>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x127bedfd0>
+    │          └ <function PDFTranslator.translate_book at 0x1458345e0>
+    └ <translator.book_translator.PDFTranslator object at 0x14583cc10>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+                               │    │     │   │        │                └ 'Japanese'
+                               │    │     │   │        └ 'English'
+                               │    │     │   └ <book.content.Content object at 0x1459802b0>
+                               │    │     └ <function TranslatorChain.run at 0x145834550>
+                               │    └ <translator.translator_chain.TranslatorChain object at 0x14583ccd0>
+                               └ <translator.book_translator.PDFTranslator object at 0x14583cc10>
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x140c4ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x14583ccd0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x145d0bb80>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional...
+            │       │   │    └ <function BaseChatModel.invoke at 0x140f7f4c0>
+            │       │   └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x145d1b140>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x140f7fc10>
+    └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x145d0b9d0>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional_kwargs={}, response_met...
+           │    └ <function BaseChatModel.generate at 0x140f7faf0>
+           └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x140f7fd30>
+    └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function BaseChatOpenAI._generate at 0x144607ee0>
+             └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.5, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x13feec790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>
+               └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.5, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>,)
+           └ <function Completions.create at 0x13feec700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x14583cb50>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x13f97e040>
+           │    │          └ <openai.OpenAI object at 0x14583cb50>
+           │    └ ~ResponseT
+           └ <function cast at 0x102e63940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x13f97e160>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x13f97e160>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:25:05 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:25:05 - MainProcess | MainThread | content.set_translation:35 - WARNING -当前翻译之后的文本内容不是字符串，请检查！
+20250423 15:25:05 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 15:25:07 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x1458e5ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x1458ebd30>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x1458e2f70>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x1458e5040>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': None, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x14588daf0>
+             │    └ <httpcore.SyncBackend object at 0x1459198e0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x145f5e1c0>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x145f58350>
+    └ <contextlib._GeneratorContextManager object at 0x145f5bb80>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x13e1494c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+               └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x13e149550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x13e1495e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x13e149670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x14583cd90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x13e137e50>
+               └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x1458e5ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x145919640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x145f5e340>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x145f58270>
+    └ <contextlib._GeneratorContextManager object at 0x145f5b370>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x127bedfd0>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x127bedfd0>
+    │          └ <function PDFTranslator.translate_book at 0x1458345e0>
+    └ <translator.book_translator.PDFTranslator object at 0x14583cc10>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+    │                          │    │     │   │        │                └ 'Japanese'
+    │                          │    │     │   │        └ 'English'
+    │                          │    │     │   └ <book.content.TableContent object at 0x145955ee0>
+    │                          │    │     └ <function TranslatorChain.run at 0x145834550>
+    │                          │    └ <translator.translator_chain.TranslatorChain object at 0x14583ccd0>
+    │                          └ <translator.book_translator.PDFTranslator object at 0x14583cc10>
+    └ ''
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x140c4ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x14583ccd0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x145d67a00>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional...
+            │       │   │    └ <function BaseChatModel.invoke at 0x140f7f4c0>
+            │       │   └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x145f4d180>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x140f7fc10>
+    └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x145d6b730>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional_kwargs={}, response_met...
+           │    └ <function BaseChatModel.generate at 0x140f7faf0>
+           └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x140f7fd30>
+    └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function BaseChatOpenAI._generate at 0x144607ee0>
+             └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.5, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x13feec790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>
+               └ ChatOpenAI(client=<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>, async_client=<openai.res...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.5, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>,)
+           └ <function Completions.create at 0x13feec700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x14583cb50>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x14592c6d0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x13f97e040>
+           │    │          └ <openai.OpenAI object at 0x14583cb50>
+           │    └ ~ResponseT
+           └ <function cast at 0x102e63940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x13f97e160>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x13f97e160>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x13f97e0d0>
+           └ <openai.OpenAI object at 0x14583cb50>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.openai.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:25:07 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:25:07 - MainProcess | MainThread | file_writer.save_book_markdown:106 - DEBUG -原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.md
+20250423 15:25:07 - MainProcess | MainThread | file_writer.save_book_markdown:135 - INFO -MarkDown文件写入完成！
+20250423 15:27:23 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 15:27:23 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 15:27:25 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x127ca7ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x127cacd30>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x127ca2f70>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x127ca7040>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x127c4daf0>
+             │    └ <httpcore.SyncBackend object at 0x127cd8940>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13316bc80>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x13310feb0>
+    └ <contextlib._GeneratorContextManager object at 0x13316c1f0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x1241694c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+               └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x124169550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x1241695e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x124169670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x123cf7e50>
+               └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x127ca7ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13316be00>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x13310fdd0>
+    └ <contextlib._GeneratorContextManager object at 0x133169910>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x126bf1c10>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x126bf1c10>
+    │          └ <function PDFTranslator.translate_book at 0x127bf5550>
+    └ <translator.book_translator.PDFTranslator object at 0x127bfa520>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+                               │    │     │   │        │                └ 'Japanese'
+                               │    │     │   │        └ 'English'
+                               │    │     │   └ <book.content.Content object at 0x127f40310>
+                               │    │     └ <function TranslatorChain.run at 0x127bf54c0>
+                               │    └ <translator.translator_chain.TranslatorChain object at 0x127bfadc0>
+                               └ <translator.book_translator.PDFTranslator object at 0x127bfa520>
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x126a3ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x127bfadc0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x13310dbe0>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional...
+            │       │   │    └ <function BaseChatModel.invoke at 0x126b3f4c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x13311ae00>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x126b3fc10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x13310da30>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional_kwargs={}, response_met...
+           │    └ <function BaseChatModel.generate at 0x126b3faf0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x126b3fd30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x127522040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x1253ac790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x127bfa070>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>,)
+           └ <function Completions.create at 0x1253ac700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x127bfa790>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x127bfa070>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x124d3d040>
+           │    │          └ <openai.OpenAI object at 0x127bfa790>
+           │    └ ~ResponseT
+           └ <function cast at 0x10313b940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x124d3d160>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x124d3d160>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:27:25 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:27:25 - MainProcess | MainThread | content.set_translation:35 - WARNING -当前翻译之后的文本内容不是字符串，请检查！
+20250423 15:27:25 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 15:27:26 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x127ca7ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x127cacd30>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x127ca2f70>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x127ca7040>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x127c4daf0>
+             │    └ <httpcore.SyncBackend object at 0x127cd8940>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x1334669c0>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x13345a5f0>
+    └ <contextlib._GeneratorContextManager object at 0x133464a90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x1241694c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+               └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x124169550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x1241695e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x124169670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x127bfa0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x123cf7e50>
+               └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x127ca7ca0>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x127cd86a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x133466b40>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x13345a510>
+    └ <contextlib._GeneratorContextManager object at 0x133464100>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x126bf1c10>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x126bf1c10>
+    │          └ <function PDFTranslator.translate_book at 0x127bf5550>
+    └ <translator.book_translator.PDFTranslator object at 0x127bfa520>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+    │                          │    │     │   │        │                └ 'Japanese'
+    │                          │    │     │   │        └ 'English'
+    │                          │    │     │   └ <book.content.TableContent object at 0x127f14f40>
+    │                          │    │     └ <function TranslatorChain.run at 0x127bf54c0>
+    │                          │    └ <translator.translator_chain.TranslatorChain object at 0x127bfadc0>
+    │                          └ <translator.book_translator.PDFTranslator object at 0x127bfa520>
+    └ ''
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x126a3ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x127bfadc0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x133169a00>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional...
+            │       │   │    └ <function BaseChatModel.invoke at 0x126b3f4c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x133454540>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x126b3fc10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x13316c6d0>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Japanese', additional_kwargs={}, response_met...
+           │    └ <function BaseChatModel.generate at 0x126b3faf0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x126b3fd30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x127522040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x1253ac790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x127bfa070>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x127bfa070>,)
+           └ <function Completions.create at 0x1253ac700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x127bfa790>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x127bfa070>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x124d3d040>
+           │    │          └ <openai.OpenAI object at 0x127bfa790>
+           │    └ ~ResponseT
+           └ <function cast at 0x10313b940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x124d3d160>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x124d3d160>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x124d3d0d0>
+           └ <openai.OpenAI object at 0x127bfa790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:27:26 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:27:26 - MainProcess | MainThread | file_writer.save_book_markdown:106 - DEBUG -原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.md
+20250423 15:27:26 - MainProcess | MainThread | file_writer.save_book_markdown:135 - INFO -MarkDown文件写入完成！
+20250423 15:37:03 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 15:37:03 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 15:37:04 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x13a2e7d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x13a2ecdc0>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x13a2e7040>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x13a2e70d0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x13a28db80>
+             │    └ <httpcore.SyncBackend object at 0x13a318940>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13a96cc80>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x13a911e40>
+    └ <contextlib._GeneratorContextManager object at 0x13a96d1f0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x12b9b54c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+               └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x12b9b5550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x12b9b55e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x12b9b5670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x12b9a4e50>
+               └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x13a2e7d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13a96ce00>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x13a911d60>
+    └ <contextlib._GeneratorContextManager object at 0x13a96a910>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x139231c10>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x139231c10>
+    │          └ <function PDFTranslator.translate_book at 0x13a235550>
+    └ <translator.book_translator.PDFTranslator object at 0x13a23a520>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+                               │    │     │   │        │                └ 'Chinese'
+                               │    │     │   │        └ 'English'
+                               │    │     │   └ <book.content.Content object at 0x13a380310>
+                               │    │     └ <function TranslatorChain.run at 0x13a2354c0>
+                               │    └ <translator.translator_chain.TranslatorChain object at 0x13a23adc0>
+                               └ <translator.book_translator.PDFTranslator object at 0x13a23a520>
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x13907ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x13a23adc0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x13a90dbe0>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_...
+            │       │   │    └ <function BaseChatModel.invoke at 0x13917f4c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x13a91ac40>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x13917fc10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x13a90da30>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_kwargs={}, response_meta...
+           │    └ <function BaseChatModel.generate at 0x13917faf0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x13917fd30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x139b61040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x12fb2c790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x13a23a070>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>,)
+           └ <function Completions.create at 0x12fb2c700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x13a23a790>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x13a23a070>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x12f4bd040>
+           │    │          └ <openai.OpenAI object at 0x13a23a790>
+           │    └ ~ResponseT
+           └ <function cast at 0x100b2f940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x12f4bd160>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x12f4bd160>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:37:04 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:37:04 - MainProcess | MainThread | content.set_translation:35 - WARNING -当前翻译之后的文本内容不是字符串，请检查！
+20250423 15:37:04 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 15:37:06 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x13a2e7d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x13a2ecdc0>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x13a2e7040>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x13a2e70d0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x13a28db80>
+             │    └ <httpcore.SyncBackend object at 0x13a318940>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13ab66780>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x13ab5b580>
+    └ <contextlib._GeneratorContextManager object at 0x13ab64a90>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x12b9b54c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+               └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x12b9b5550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x12b9b55e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x12b9b5670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x13a23a0a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x12b9a4e50>
+               └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x13a2e7d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x13a3186a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x13ab66900>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x13ab5b4a0>
+    └ <contextlib._GeneratorContextManager object at 0x13ab64100>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x139231c10>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x139231c10>
+    │          └ <function PDFTranslator.translate_book at 0x13a235550>
+    └ <translator.book_translator.PDFTranslator object at 0x13a23a520>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+    │                          │    │     │   │        │                └ 'Chinese'
+    │                          │    │     │   │        └ 'English'
+    │                          │    │     │   └ <book.content.TableContent object at 0x13a354f40>
+    │                          │    │     └ <function TranslatorChain.run at 0x13a2354c0>
+    │                          │    └ <translator.translator_chain.TranslatorChain object at 0x13a23adc0>
+    │                          └ <translator.book_translator.PDFTranslator object at 0x13a23a520>
+    └ ''
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x13907ddc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x13a23adc0>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x13a96aa00>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_...
+            │       │   │    └ <function BaseChatModel.invoke at 0x13917f4c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x13ab543c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x13917fc10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x13a96d6d0>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_kwargs={}, response_meta...
+           │    └ <function BaseChatModel.generate at 0x13917faf0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x13917fd30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x139b61040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x12fb2c790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x13a23a070>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x13a23a070>,)
+           └ <function Completions.create at 0x12fb2c700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x13a23a790>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x13a23a070>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x12f4bd040>
+           │    │          └ <openai.OpenAI object at 0x13a23a790>
+           │    └ ~ResponseT
+           └ <function cast at 0x100b2f940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x12f4bd160>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x12f4bd160>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x12f4bd0d0>
+           └ <openai.OpenAI object at 0x13a23a790>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:37:06 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:37:06 - MainProcess | MainThread | file_writer.save_book_pdf:46 - DEBUG -pdf原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.pdf
+20250423 15:37:06 - MainProcess | MainThread | file_writer.save_book_pdf:93 - INFO -pdf文件写入完成！
+20250423 15:41:00 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 15:41:00 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 15:41:02 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x137ec2d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x137ec7dc0>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x137ec2040>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x137ec20d0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x137e69b80>
+             │    └ <httpcore.SyncBackend object at 0x137ef58e0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x150369bc0>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x150310e40>
+    └ <contextlib._GeneratorContextManager object at 0x15036a190>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x1310194c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+               └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x131019550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x1310195e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x131019670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x130ba8e50>
+               └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x137ec2d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x150369d40>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x150310d60>
+    └ <contextlib._GeneratorContextManager object at 0x1503678b0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x136475bb0>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x136475bb0>
+    │          └ <function PDFTranslator.translate_book at 0x137e12550>
+    └ <translator.book_translator.PDFTranslator object at 0x137e051f0>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+                               │    │     │   │        │                └ 'Chinese'
+                               │    │     │   │        └ 'English'
+                               │    │     │   └ <book.content.Content object at 0x137f5d2b0>
+                               │    │     └ <function TranslatorChain.run at 0x137e124c0>
+                               │    └ <translator.translator_chain.TranslatorChain object at 0x137e05160>
+                               └ <translator.book_translator.PDFTranslator object at 0x137e051f0>
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x1362c1dc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x137e05160>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x15030db80>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_...
+            │       │   │    └ <function BaseChatModel.invoke at 0x1363c34c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x15031ac40>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x1363c3c10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x15030d9d0>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_kwargs={}, response_meta...
+           │    └ <function BaseChatModel.generate at 0x1363c3af0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x1363c3d30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x136e41040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x13226c790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x137e05250>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x137e05250>,)
+           └ <function Completions.create at 0x13226c700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x137e05880>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x137e05250>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x131bfd040>
+           │    │          └ <openai.OpenAI object at 0x137e05880>
+           │    └ ~ResponseT
+           └ <function cast at 0x1018b3940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x131bfd160>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x131bfd160>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:41:02 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:41:02 - MainProcess | MainThread | content.set_translation:35 - WARNING -当前翻译之后的文本内容不是字符串，请检查！
+20250423 15:41:02 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 15:41:03 - MainProcess | MainThread | translator_chain.run:47 - ERROR -Connection error.
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x137ec2d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               │          └ <function TunnelHTTPConnection.handle_request at 0x137ec7dc0>
+               └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       │    │           └ <function HTTPConnection.handle_request at 0x137ec2040>
+                       │    └ <HTTPConnection [CONNECTION FAILED]>
+                       └ <TunnelHTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             │    │        └ <Request [b'CONNECT']>
+             │    └ <function HTTPConnection._connect at 0x137ec20d0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             │    │                │             └ {'host': '127.0.0.1', 'port': 7890, 'local_address': None, 'timeout': 5.0, 'socket_options': None}
+             │    │                └ <function SyncBackend.connect_tcp at 0x137e69b80>
+             │    └ <httpcore.SyncBackend object at 0x137ef58e0>
+             └ <HTTPConnection [CONNECTION FAILED]>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_backends/sync.py", line 215, in connect_tcp
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    │      │            │      └ 1
+                    │      │            └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+                    │      └ 6
+                    └ <module 'socket' from '/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/socket.py'>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x150565a00>
+    │    │   │     │    └ ConnectionRefusedError(61, 'Connection refused')
+    │    │   │     └ <class 'ConnectionRefusedError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_exceptions at 0x150554580>
+    └ <contextlib._GeneratorContextManager object at 0x150563a30>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+          └ <class 'httpcore.ConnectError'>
+
+httpcore.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 955, in _request
+    response = self._client.send(
+               │    │       └ <function Client.send at 0x1310194c0>
+               │    └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+               └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               │    └ <function Client._send_handling_auth at 0x131019550>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               │    └ <function Client._send_handling_redirects at 0x1310195e0>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               │    │                    └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │    └ <function Client._send_single_request at 0x131019670>
+               └ <openai._base_client.SyncHttpxClientWrapper object at 0x137df17c0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               │         │              └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+               │         └ <function HTTPTransport.handle_request at 0x130ba8e50>
+               └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           │    │     │              └ <Request [b'POST']>
+           │    │     └ <function ConnectionPool.handle_request at 0x137ec2d30>
+           │    └ <HTTPProxy [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+           └ <httpx.HTTPTransport object at 0x137ef5640>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+    │    │   │     │    │      └ <traceback object at 0x150565b80>
+    │    │   │     │    └ ConnectError(ConnectionRefusedError(61, 'Connection refused'))
+    │    │   │     └ <class 'httpcore.ConnectError'>
+    │    │   └ <method 'throw' of 'generator' objects>
+    │    └ <generator object map_httpcore_exceptions at 0x1505544a0>
+    └ <contextlib._GeneratorContextManager object at 0x1505630a0>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+          │          └ '[Errno 61] Connection refused'
+          └ <class 'httpx.ConnectError'>
+
+httpx.ConnectError: [Errno 61] Connection refused
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/main.py", line 19, in <module>
+    translator.translate_book(file_path=config.input_file, source_language=config.source_language,
+    │          │                        │                                  └ <utils.project_config.ProjectConfig object at 0x136475bb0>
+    │          │                        └ <utils.project_config.ProjectConfig object at 0x136475bb0>
+    │          └ <function PDFTranslator.translate_book at 0x137e12550>
+    └ <translator.book_translator.PDFTranslator object at 0x137e051f0>
+
+  File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/book_translator.py", line 38, in translate_book
+    translation_text, status = self.chain.run(content, source_language, target_language)
+    │                          │    │     │   │        │                └ 'Chinese'
+    │                          │    │     │   │        └ 'English'
+    │                          │    │     │   └ <book.content.TableContent object at 0x137f2fee0>
+    │                          │    │     └ <function TranslatorChain.run at 0x137e124c0>
+    │                          │    └ <translator.translator_chain.TranslatorChain object at 0x137e05160>
+    │                          └ <translator.book_translator.PDFTranslator object at 0x137e051f0>
+    └ ''
+
+> File "/Users/hepeng/Downloads/Langchain_BookTranslator/translator/translator_chain.py", line 40, in run
+    result = self.langchain.invoke({
+             │    │         └ <function RunnableSequence.invoke at 0x1362c1dc0>
+             │    └ ChatPromptTemplate(input_variables=['source_language', 'target_language', 'text'], input_types={}, partial_variables={}, mess...
+             └ <translator.translator_chain.TranslatorChain object at 0x137e05160>
+
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/runnables/base.py", line 3025, in invoke
+    input = context.run(step.invoke, input, config)
+            │       │   │    │       │      └ {'tags': [], 'metadata': {}, 'callbacks': <langchain_core.callbacks.manager.CallbackManager object at 0x1503679a0>, 'recursio...
+            │       │   │    │       └ ChatPromptValue(messages=[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_...
+            │       │   │    └ <function BaseChatModel.invoke at 0x1363c34c0>
+            │       │   └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+            │       └ <method 'run' of 'Context' objects>
+            └ <Context object at 0x150553540>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 307, in invoke
+    self.generate_prompt(
+    │    └ <function BaseChatModel.generate_prompt at 0x1363c3c10>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 843, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           │    │        │                     │               │            └ {'tags': [], 'metadata': {}, 'run_name': None, 'run_id': None}
+           │    │        │                     │               └ <langchain_core.callbacks.manager.CallbackManager object at 0x15036a670>
+           │    │        │                     └ None
+           │    │        └ [[SystemMessage(content='你是一个翻译专家，精通各种人类语言。\n\n        输入的是：English 语言，翻译之后的语言为：Chinese', additional_kwargs={}, response_meta...
+           │    └ <function BaseChatModel.generate at 0x1363c3af0>
+           └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 683, in generate
+    self._generate_with_cache(
+    │    └ <function BaseChatModel._generate_with_cache at 0x1363c3d30>
+    └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py", line 908, in _generate_with_cache
+    result = self._generate(
+             │    └ <function ChatDeepSeek._generate at 0x136e41040>
+             └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_deepseek/chat_models.py", line 296, in _generate
+    return super()._generate(
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/langchain_openai/chat_models/base.py", line 925, in _generate
+    response = self.client.create(**payload)
+               │    │      │        └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+               │    │      └ <function Completions.create at 0x13226c790>
+               │    └ <openai.resources.chat.completions.completions.Completions object at 0x137e05250>
+               └ ChatDeepSeek(client=<openai.resources.chat.completions.completions.Completions object at 0x137e05250>, async_client=<openai.r...
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_utils/_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'deepseek-chat', 'stream': False, 'temperature': 0.0, 'messages': [{'content': '你是一个翻译专家，精通各种人类语言。\n\n        输入的是：...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x137e05250>,)
+           └ <function Completions.create at 0x13226c700>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 914, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x137e05880>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x137e05250>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ False
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=NOT_...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x131bfd040>
+           │    │          └ <openai.OpenAI object at 0x137e05880>
+           │    └ ~ResponseT
+           └ <function cast at 0x1018b3940>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 919, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x131bfd160>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 979, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x131bfd160>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 1057, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x131bfd0d0>
+           └ <openai.OpenAI object at 0x137e05880>
+  File "/Users/hepeng/anaconda3/envs/LLM/lib/python3.9/site-packages/openai/_base_client.py", line 989, in _request
+    raise APIConnectionError(request=request) from err
+          │                          └ <Request('POST', 'https://api.deepseek.com/v1/chat/completions')>
+          └ <class 'openai.APIConnectionError'>
+
+openai.APIConnectionError: Connection error.
+20250423 15:41:03 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 
+20250423 15:41:03 - MainProcess | MainThread | file_writer.save_book_pdf:46 - DEBUG -pdf原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.pdf
+20250423 15:41:03 - MainProcess | MainThread | file_writer.save_book_pdf:93 - INFO -pdf文件写入完成！
+20250423 15:42:57 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 15:42:57 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 15:43:08 - MainProcess | MainThread | translator_chain.run:45 - INFO -测试数据
+本数据集包含由OpenAI开发的人工智能语言模型ChatGPT提供的两个测试样本。这些样本包括一个Markdown表格和一段英文文本，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕色狐狸跳过懒惰的狗。这个全字母句包含了英语字母表中每个字母至少一次。全字母句常被用于测试字体、键盘和其他与文本相关的工具。除英语外，许多其他语言也有全字母句。由于某些语言的独特特性，构造全字母句的难度会更高。
+
+表格测试
+20250423 15:43:08 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 测试数据
+本数据集包含由OpenAI开发的人工智能语言模型ChatGPT提供的两个测试样本。这些样本包括一个Markdown表格和一段英文文本，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕色狐狸跳过懒惰的狗。这个全字母句包含了英语字母表中每个字母至少一次。全字母句常被用于测试字体、键盘和其他与文本相关的工具。除英语外，许多其他语言也有全字母句。由于某些语言的独特特性，构造全字母句的难度会更高。
+
+表格测试
+20250423 15:43:08 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 15:43:16 - MainProcess | MainThread | translator_chain.run:45 - INFO -水果,颜色,价格（美元）  
+苹果,红色,1.20  
+香蕉,黄色,0.50  
+橙子,橙色,0.80  
+草莓,红色,2.50  
+蓝莓,蓝色,3.00  
+猕猴桃,绿色,1.00  
+芒果,橙色,1.50  
+葡萄,紫色,2.00
+20250423 15:43:16 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 水果,颜色,价格（美元）  
+苹果,红色,1.20  
+香蕉,黄色,0.50  
+橙子,橙色,0.80  
+草莓,红色,2.50  
+蓝莓,蓝色,3.00  
+猕猴桃,绿色,1.00  
+芒果,橙色,1.50  
+葡萄,紫色,2.00
+20250423 15:43:16 - MainProcess | MainThread | content.set_translation:69 - DEBUG -[['水果', '颜色', '价格（美元）'], ['苹果', '红色', '1.20'], ['香蕉', '黄色', '0.50'], ['橙子', '橙色', '0.80'], ['草莓', '红色', '2.50'], ['蓝莓', '蓝色', '3.00'], ['猕猴桃', '绿色', '1.00'], ['芒果', '橙色', '1.50'], ['葡萄', '紫色', '2.00']]
+20250423 15:43:16 - MainProcess | MainThread | content.set_translation:74 - DEBUG -处理成DataFrame数据：
+     0   1       2
+0   水果  颜色  价格（美元）
+1   苹果  红色    1.20
+2   香蕉  黄色    0.50
+3   橙子  橙色    0.80
+4   草莓  红色    2.50
+5   蓝莓  蓝色    3.00
+6  猕猴桃  绿色    1.00
+7   芒果  橙色    1.50
+8   葡萄  紫色    2.00
+20250423 15:43:16 - MainProcess | MainThread | file_writer.save_book_pdf:46 - DEBUG -pdf原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.pdf
+20250423 15:43:16 - MainProcess | MainThread | file_writer.save_book_pdf:93 - INFO -pdf文件写入完成！
+20250423 16:22:02 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 16:22:02 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 16:22:14 - MainProcess | MainThread | translator_chain.run:45 - INFO -测试数据
+本数据集包含由OpenAI旗下AI语言模型ChatGPT提供的两个测试样本。这些样本包含一个Markdown表格和一段英文文本段落，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕毛狐狸从懒狗身上跃过。这个全字母句包含了英语字母表中的每个字母至少一次。全字母句常被用于测试字体、键盘及其他文本相关工具。除英语外，许多其他语言也存在全字母句。由于语言的独特性，某些全字母句的构建难度更高。
+
+表格测试
+（注：此处保留"Table Testing"作为标题未翻译，因实际表格内容未提供。若需完整翻译，请补充表格具体数据）
+20250423 16:22:14 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 测试数据
+本数据集包含由OpenAI旗下AI语言模型ChatGPT提供的两个测试样本。这些样本包含一个Markdown表格和一段英文文本段落，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕毛狐狸从懒狗身上跃过。这个全字母句包含了英语字母表中的每个字母至少一次。全字母句常被用于测试字体、键盘及其他文本相关工具。除英语外，许多其他语言也存在全字母句。由于语言的独特性，某些全字母句的构建难度更高。
+
+表格测试
+（注：此处保留"Table Testing"作为标题未翻译，因实际表格内容未提供。若需完整翻译，请补充表格具体数据）
+20250423 16:22:14 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 16:22:21 - MainProcess | MainThread | translator_chain.run:45 - INFO -水果,颜色,价格(美元)
+苹果,红色,1.20
+香蕉,黄色,0.50
+橙子,橙色,0.80
+草莓,红色,2.50
+蓝莓,蓝色,3.00
+猕猴桃,绿色,1.00
+芒果,橙色,1.50
+葡萄,紫色,2.00
+20250423 16:22:21 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 水果,颜色,价格(美元)
+苹果,红色,1.20
+香蕉,黄色,0.50
+橙子,橙色,0.80
+草莓,红色,2.50
+蓝莓,蓝色,3.00
+猕猴桃,绿色,1.00
+芒果,橙色,1.50
+葡萄,紫色,2.00
+20250423 16:22:21 - MainProcess | MainThread | content.set_translation:69 - DEBUG -[['水果', '颜色', '价格(美元)'], ['苹果', '红色', '1.20'], ['香蕉', '黄色', '0.50'], ['橙子', '橙色', '0.80'], ['草莓', '红色', '2.50'], ['蓝莓', '蓝色', '3.00'], ['猕猴桃', '绿色', '1.00'], ['芒果', '橙色', '1.50'], ['葡萄', '紫色', '2.00']]
+20250423 16:22:21 - MainProcess | MainThread | content.set_translation:74 - DEBUG -处理成DataFrame数据：
+     0   1       2
+0   水果  颜色  价格(美元)
+1   苹果  红色    1.20
+2   香蕉  黄色    0.50
+3   橙子  橙色    0.80
+4   草莓  红色    2.50
+5   蓝莓  蓝色    3.00
+6  猕猴桃  绿色    1.00
+7   芒果  橙色    1.50
+8   葡萄  紫色    2.00
+20250423 16:22:21 - MainProcess | MainThread | file_writer.save_book_pdf:46 - DEBUG -pdf原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.pdf
+20250423 16:22:21 - MainProcess | MainThread | file_writer.save_book_pdf:93 - INFO -pdf文件写入完成！
+20250423 16:24:24 - MainProcess | MainThread | pdf_parser.parse_pdf:55 - DEBUG -[pdf解析之后的文本内容]: 
+Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+20250423 16:24:24 - MainProcess | MainThread | pdf_parser.parse_pdf:61 - DEBUG -[pdf解析之后的表格内容]: 
+[[['Fruit', 'Color', 'Price (USD)'], ['Apple', 'Red', '1.20'], ['Banana', 'Yellow', '0.50'], ['Orange', 'Orange', '0.80'], ['Strawberry', 'Red', '2.50'], ['Blueberry', 'Blue', '3.00'], ['Kiwi', 'Green', '1.00'], ['Mango', 'Orange', '1.50'], ['Grape', 'Purple', '2.00']]]
+20250423 16:24:36 - MainProcess | MainThread | translator_chain.run:45 - INFO -测试数据
+本数据集包含由OpenAI开发的人工智能语言模型ChatGPT提供的两个测试样本。这些样本包含一个Markdown表格和一段英文文本，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕色狐狸跳过懒惰的狗。这个全字母句包含了英语字母表中每个字母至少一次。全字母句常被用于测试字体、键盘和其他与文本相关的工具。除英语外，许多其他语言也存在全字母句。由于某些语言的独特性，构造全字母句的难度会更高。
+
+表格测试
+（注：此处保留"Table Testing"作为标题未翻译，因实际表格内容未提供。若需翻译完整表格，请提供具体表格数据）
+20250423 16:24:36 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 测试数据
+本数据集包含由OpenAI开发的人工智能语言模型ChatGPT提供的两个测试样本。这些样本包含一个Markdown表格和一段英文文本，可用于测试同时支持文本和表格格式的英汉翻译软件。
+
+文本测试
+敏捷的棕色狐狸跳过懒惰的狗。这个全字母句包含了英语字母表中每个字母至少一次。全字母句常被用于测试字体、键盘和其他与文本相关的工具。除英语外，许多其他语言也存在全字母句。由于某些语言的独特性，构造全字母句的难度会更高。
+
+表格测试
+（注：此处保留"Table Testing"作为标题未翻译，因实际表格内容未提供。若需翻译完整表格，请提供具体表格数据）
+20250423 16:24:36 - MainProcess | MainThread | translator_chain.run:37 - INFO -+++++++++++++
+20250423 16:24:43 - MainProcess | MainThread | translator_chain.run:45 - INFO -水果,颜色,价格（美元）  
+苹果,红色,1.20  
+香蕉,黄色,0.50  
+橙子,橙色,0.80  
+草莓,红色,2.50  
+蓝莓,蓝色,3.00  
+猕猴桃,绿色,1.00  
+芒果,橙色,1.50  
+葡萄,紫色,2.00
+20250423 16:24:43 - MainProcess | MainThread | book_translator.translate_book:39 - DEBUG -翻译之后的内容是: 
+ 水果,颜色,价格（美元）  
+苹果,红色,1.20  
+香蕉,黄色,0.50  
+橙子,橙色,0.80  
+草莓,红色,2.50  
+蓝莓,蓝色,3.00  
+猕猴桃,绿色,1.00  
+芒果,橙色,1.50  
+葡萄,紫色,2.00
+20250423 16:24:43 - MainProcess | MainThread | content.set_translation:69 - DEBUG -[['水果', '颜色', '价格（美元）'], ['苹果', '红色', '1.20'], ['香蕉', '黄色', '0.50'], ['橙子', '橙色', '0.80'], ['草莓', '红色', '2.50'], ['蓝莓', '蓝色', '3.00'], ['猕猴桃', '绿色', '1.00'], ['芒果', '橙色', '1.50'], ['葡萄', '紫色', '2.00']]
+20250423 16:24:43 - MainProcess | MainThread | content.set_translation:74 - DEBUG -处理成DataFrame数据：
+     0   1       2
+0   水果  颜色  价格（美元）
+1   苹果  红色    1.20
+2   香蕉  黄色    0.50
+3   橙子  橙色    0.80
+4   草莓  红色    2.50
+5   蓝莓  蓝色    3.00
+6  猕猴桃  绿色    1.00
+7   芒果  橙色    1.50
+8   葡萄  紫色    2.00
+20250423 16:24:43 - MainProcess | MainThread | file_writer.save_book_pdf:46 - DEBUG -pdf原文件路径是：test/test.pdf, 翻译之后的输出文件路径: test/test_translated.pdf
+20250423 16:24:43 - MainProcess | MainThread | file_writer.save_book_pdf:93 - INFO -pdf文件写入完成！
